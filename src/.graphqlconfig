@@ -1,0 +1,15 @@
+{
+  "name": "maoo GraphQL Schema",
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "maoo GraphQL Schema Admin": {
+        "url": "http://localhost:8080/v1/graphql",
+        "headers": {
+          "x-hasura-admin-secret": "adminsecret"
+        },
+        "introspect": true
+      }
+    }
+  }
+}

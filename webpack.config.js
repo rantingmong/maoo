@@ -1,12 +1,16 @@
-const path = require('path')
+const path              = require('path')
+const sveltePreprocess  = require('svelte-preprocess')
+
+const mode  = process.env.NODE_ENV
+const dev   = mode === 'development'
 
 module.exports = {
-  entry: './fnd/index.js',
+  entry: './src/index.ts',
   output: {
     filename  : 'program.js',
     path      : path.resolve(__dirname, 'public')
   },
-  mode: 'development',
+  mode,
   devServer: {
     port: 1100,
     contentBase: './public'
@@ -15,7 +19,7 @@ module.exports = {
     alias: {
       svelte: path.resolve('node_modules', 'svelte')
     },
-    extensions: ['.mjs', '.js', '.svelte'],
+    extensions: ['.mjs', '.js', '.ts', '.svelte'],
     mainFields: ['svelte', 'browser', 'module', 'main']
   },
   module: {
@@ -26,18 +30,13 @@ module.exports = {
         use: {
           loader: 'svelte-loader',
           options: {
-            compilerOptions: {
-              dev: true
-            }
+            preprocess: sveltePreprocess({sourceMap: dev})
           },
         }
       },
       {
-        // required to prevent errors from Svelte on Webpack 5+, omit on Webpack 4
-        test: /node_modules\/svelte\/.*\.mjs$/,
-        resolve: {
-          fullySpecified: false
-        }
+        test: /\.ts$/,
+        loader: 'ts-loader',
       }
     ]
   }

@@ -1,0 +1,2194 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: query_root
+    mutation: mutation_root
+    subscription: subscription_root
+}
+
+"columns and relationships of \"maoo.owner_profiles\""
+type maoo_owner_profiles {
+    description: String
+    id: uuid!
+    profile_id: uuid!
+}
+
+"aggregated selection of \"maoo.owner_profiles\""
+type maoo_owner_profiles_aggregate {
+    aggregate: maoo_owner_profiles_aggregate_fields
+    nodes: [maoo_owner_profiles!]!
+}
+
+"aggregate fields of \"maoo.owner_profiles\""
+type maoo_owner_profiles_aggregate_fields {
+    count(columns: [maoo_owner_profiles_select_column!], distinct: Boolean): Int
+    max: maoo_owner_profiles_max_fields
+    min: maoo_owner_profiles_min_fields
+}
+
+"aggregate max on columns"
+type maoo_owner_profiles_max_fields {
+    description: String
+    id: uuid
+    profile_id: uuid
+}
+
+"aggregate min on columns"
+type maoo_owner_profiles_min_fields {
+    description: String
+    id: uuid
+    profile_id: uuid
+}
+
+"response of any mutation on the table \"maoo.owner_profiles\""
+type maoo_owner_profiles_mutation_response {
+    "number of affected rows by the mutation"
+    affected_rows: Int!
+    "data of the affected rows by the mutation"
+    returning: [maoo_owner_profiles!]!
+}
+
+"columns and relationships of \"maoo.pet_profiles\""
+type maoo_pet_profiles {
+    breed: String!
+    coat: String!
+    color: String
+    id: uuid!
+    profile_id: uuid!
+}
+
+"aggregated selection of \"maoo.pet_profiles\""
+type maoo_pet_profiles_aggregate {
+    aggregate: maoo_pet_profiles_aggregate_fields
+    nodes: [maoo_pet_profiles!]!
+}
+
+"aggregate fields of \"maoo.pet_profiles\""
+type maoo_pet_profiles_aggregate_fields {
+    count(columns: [maoo_pet_profiles_select_column!], distinct: Boolean): Int
+    max: maoo_pet_profiles_max_fields
+    min: maoo_pet_profiles_min_fields
+}
+
+"aggregate max on columns"
+type maoo_pet_profiles_max_fields {
+    breed: String
+    coat: String
+    color: String
+    id: uuid
+    profile_id: uuid
+}
+
+"aggregate min on columns"
+type maoo_pet_profiles_min_fields {
+    breed: String
+    coat: String
+    color: String
+    id: uuid
+    profile_id: uuid
+}
+
+"response of any mutation on the table \"maoo.pet_profiles\""
+type maoo_pet_profiles_mutation_response {
+    "number of affected rows by the mutation"
+    affected_rows: Int!
+    "data of the affected rows by the mutation"
+    returning: [maoo_pet_profiles!]!
+}
+
+"""
+
+Resource that is linked with a revision.
+
+
+columns and relationships of "maoo.post_resource"
+"""
+type maoo_post_resource {
+    created_at: timestamp!
+    id: uuid!
+    "The instruction to apply to this resource."
+    instruction: String
+    "The link where the resource is located."
+    link: String!
+    post_id: uuid!
+}
+
+"aggregated selection of \"maoo.post_resource\""
+type maoo_post_resource_aggregate {
+    aggregate: maoo_post_resource_aggregate_fields
+    nodes: [maoo_post_resource!]!
+}
+
+"aggregate fields of \"maoo.post_resource\""
+type maoo_post_resource_aggregate_fields {
+    count(columns: [maoo_post_resource_select_column!], distinct: Boolean): Int
+    max: maoo_post_resource_max_fields
+    min: maoo_post_resource_min_fields
+}
+
+"aggregate max on columns"
+type maoo_post_resource_max_fields {
+    created_at: timestamp
+    id: uuid
+    instruction: String
+    link: String
+    post_id: uuid
+}
+
+"aggregate min on columns"
+type maoo_post_resource_min_fields {
+    created_at: timestamp
+    id: uuid
+    instruction: String
+    link: String
+    post_id: uuid
+}
+
+"response of any mutation on the table \"maoo.post_resource\""
+type maoo_post_resource_mutation_response {
+    "number of affected rows by the mutation"
+    affected_rows: Int!
+    "data of the affected rows by the mutation"
+    returning: [maoo_post_resource!]!
+}
+
+"""
+
+The content of a post. Posts are defined by revisions wherein a profile can update the details of a post.
+
+
+columns and relationships of "maoo.post_revision"
+"""
+type maoo_post_revision {
+    "The string description of the post defined by a profile."
+    body: String
+    id: uuid!
+    post_id: uuid!
+    updated_at: timestamp!
+}
+
+"aggregated selection of \"maoo.post_revision\""
+type maoo_post_revision_aggregate {
+    aggregate: maoo_post_revision_aggregate_fields
+    nodes: [maoo_post_revision!]!
+}
+
+"aggregate fields of \"maoo.post_revision\""
+type maoo_post_revision_aggregate_fields {
+    count(columns: [maoo_post_revision_select_column!], distinct: Boolean): Int
+    max: maoo_post_revision_max_fields
+    min: maoo_post_revision_min_fields
+}
+
+"aggregate max on columns"
+type maoo_post_revision_max_fields {
+    body: String
+    id: uuid
+    post_id: uuid
+    updated_at: timestamp
+}
+
+"aggregate min on columns"
+type maoo_post_revision_min_fields {
+    body: String
+    id: uuid
+    post_id: uuid
+    updated_at: timestamp
+}
+
+"response of any mutation on the table \"maoo.post_revision\""
+type maoo_post_revision_mutation_response {
+    "number of affected rows by the mutation"
+    affected_rows: Int!
+    "data of the affected rows by the mutation"
+    returning: [maoo_post_revision!]!
+}
+
+"""
+
+A post of a profile.
+
+
+columns and relationships of "maoo.posts"
+"""
+type maoo_posts {
+    created_at: timestamp!
+    id: uuid!
+    "An object relationship"
+    profile: maoo_profiles!
+    profile_id: uuid!
+    "An array relationship"
+    resources(
+        "distinct select on columns"
+        distinct_on: [maoo_post_resource_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_post_resource_order_by!],
+        "filter the rows returned"
+        where: maoo_post_resource_bool_exp
+    ): [maoo_post_resource!]!
+    "An aggregated array relationship"
+    resources_aggregate(
+        "distinct select on columns"
+        distinct_on: [maoo_post_resource_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_post_resource_order_by!],
+        "filter the rows returned"
+        where: maoo_post_resource_bool_exp
+    ): maoo_post_resource_aggregate!
+    "An array relationship"
+    revisions(
+        "distinct select on columns"
+        distinct_on: [maoo_post_revision_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_post_revision_order_by!],
+        "filter the rows returned"
+        where: maoo_post_revision_bool_exp
+    ): [maoo_post_revision!]!
+    "An aggregated array relationship"
+    revisions_aggregate(
+        "distinct select on columns"
+        distinct_on: [maoo_post_revision_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_post_revision_order_by!],
+        "filter the rows returned"
+        where: maoo_post_revision_bool_exp
+    ): maoo_post_revision_aggregate!
+}
+
+"aggregated selection of \"maoo.posts\""
+type maoo_posts_aggregate {
+    aggregate: maoo_posts_aggregate_fields
+    nodes: [maoo_posts!]!
+}
+
+"aggregate fields of \"maoo.posts\""
+type maoo_posts_aggregate_fields {
+    count(columns: [maoo_posts_select_column!], distinct: Boolean): Int
+    max: maoo_posts_max_fields
+    min: maoo_posts_min_fields
+}
+
+"aggregate max on columns"
+type maoo_posts_max_fields {
+    created_at: timestamp
+    id: uuid
+    profile_id: uuid
+}
+
+"aggregate min on columns"
+type maoo_posts_min_fields {
+    created_at: timestamp
+    id: uuid
+    profile_id: uuid
+}
+
+"response of any mutation on the table \"maoo.posts\""
+type maoo_posts_mutation_response {
+    "number of affected rows by the mutation"
+    affected_rows: Int!
+    "data of the affected rows by the mutation"
+    returning: [maoo_posts!]!
+}
+
+"columns and relationships of \"maoo.profiles\""
+type maoo_profiles {
+    birthdate: date
+    gender: String
+    id: uuid!
+    name_first: String!
+    name_last: String
+    "An object relationship"
+    owner: maoo_owner_profiles
+    "An object relationship"
+    pet: maoo_pet_profiles
+    "An array relationship"
+    posts(
+        "distinct select on columns"
+        distinct_on: [maoo_posts_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_posts_order_by!],
+        "filter the rows returned"
+        where: maoo_posts_bool_exp
+    ): [maoo_posts!]!
+    "An aggregated array relationship"
+    posts_aggregate(
+        "distinct select on columns"
+        distinct_on: [maoo_posts_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_posts_order_by!],
+        "filter the rows returned"
+        where: maoo_posts_bool_exp
+    ): maoo_posts_aggregate!
+    type: Int!
+    user_id: String!
+}
+
+"aggregated selection of \"maoo.profiles\""
+type maoo_profiles_aggregate {
+    aggregate: maoo_profiles_aggregate_fields
+    nodes: [maoo_profiles!]!
+}
+
+"aggregate fields of \"maoo.profiles\""
+type maoo_profiles_aggregate_fields {
+    avg: maoo_profiles_avg_fields
+    count(columns: [maoo_profiles_select_column!], distinct: Boolean): Int
+    max: maoo_profiles_max_fields
+    min: maoo_profiles_min_fields
+    stddev: maoo_profiles_stddev_fields
+    stddev_pop: maoo_profiles_stddev_pop_fields
+    stddev_samp: maoo_profiles_stddev_samp_fields
+    sum: maoo_profiles_sum_fields
+    var_pop: maoo_profiles_var_pop_fields
+    var_samp: maoo_profiles_var_samp_fields
+    variance: maoo_profiles_variance_fields
+}
+
+"aggregate avg on columns"
+type maoo_profiles_avg_fields {
+    type: Float
+}
+
+"aggregate max on columns"
+type maoo_profiles_max_fields {
+    birthdate: date
+    gender: String
+    id: uuid
+    name_first: String
+    name_last: String
+    type: Int
+    user_id: String
+}
+
+"aggregate min on columns"
+type maoo_profiles_min_fields {
+    birthdate: date
+    gender: String
+    id: uuid
+    name_first: String
+    name_last: String
+    type: Int
+    user_id: String
+}
+
+"response of any mutation on the table \"maoo.profiles\""
+type maoo_profiles_mutation_response {
+    "number of affected rows by the mutation"
+    affected_rows: Int!
+    "data of the affected rows by the mutation"
+    returning: [maoo_profiles!]!
+}
+
+"aggregate stddev on columns"
+type maoo_profiles_stddev_fields {
+    type: Float
+}
+
+"aggregate stddev_pop on columns"
+type maoo_profiles_stddev_pop_fields {
+    type: Float
+}
+
+"aggregate stddev_samp on columns"
+type maoo_profiles_stddev_samp_fields {
+    type: Float
+}
+
+"aggregate sum on columns"
+type maoo_profiles_sum_fields {
+    type: Int
+}
+
+"aggregate var_pop on columns"
+type maoo_profiles_var_pop_fields {
+    type: Float
+}
+
+"aggregate var_samp on columns"
+type maoo_profiles_var_samp_fields {
+    type: Float
+}
+
+"aggregate variance on columns"
+type maoo_profiles_variance_fields {
+    type: Float
+}
+
+"""
+
+List of all users in the platform.
+
+
+columns and relationships of "maoo.users"
+"""
+type maoo_users {
+    created_at: timestamptz!
+    email: String!
+    id: String!
+    name_user: String!
+    "An array relationship"
+    profiles(
+        "distinct select on columns"
+        distinct_on: [maoo_profiles_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_profiles_order_by!],
+        "filter the rows returned"
+        where: maoo_profiles_bool_exp
+    ): [maoo_profiles!]!
+    "An aggregated array relationship"
+    profiles_aggregate(
+        "distinct select on columns"
+        distinct_on: [maoo_profiles_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_profiles_order_by!],
+        "filter the rows returned"
+        where: maoo_profiles_bool_exp
+    ): maoo_profiles_aggregate!
+    updated_at: timestamptz!
+}
+
+"aggregated selection of \"maoo.users\""
+type maoo_users_aggregate {
+    aggregate: maoo_users_aggregate_fields
+    nodes: [maoo_users!]!
+}
+
+"aggregate fields of \"maoo.users\""
+type maoo_users_aggregate_fields {
+    count(columns: [maoo_users_select_column!], distinct: Boolean): Int
+    max: maoo_users_max_fields
+    min: maoo_users_min_fields
+}
+
+"aggregate max on columns"
+type maoo_users_max_fields {
+    created_at: timestamptz
+    email: String
+    id: String
+    name_user: String
+    updated_at: timestamptz
+}
+
+"aggregate min on columns"
+type maoo_users_min_fields {
+    created_at: timestamptz
+    email: String
+    id: String
+    name_user: String
+    updated_at: timestamptz
+}
+
+"response of any mutation on the table \"maoo.users\""
+type maoo_users_mutation_response {
+    "number of affected rows by the mutation"
+    affected_rows: Int!
+    "data of the affected rows by the mutation"
+    returning: [maoo_users!]!
+}
+
+"mutation root"
+type mutation_root {
+    "insert a single row into the table: \"maoo.owner_profiles\""
+    create_owner_profile(
+        "the row to be inserted"
+        object: maoo_owner_profiles_insert_input!,
+        "on conflict condition"
+        on_conflict: maoo_owner_profiles_on_conflict
+    ): maoo_owner_profiles
+    "insert a single row into the table: \"maoo.pet_profiles\""
+    create_pet_profile(
+        "the row to be inserted"
+        object: maoo_pet_profiles_insert_input!,
+        "on conflict condition"
+        on_conflict: maoo_pet_profiles_on_conflict
+    ): maoo_pet_profiles
+    "insert a single row into the table: \"maoo.posts\""
+    create_post(
+        "the row to be inserted"
+        object: maoo_posts_insert_input!,
+        "on conflict condition"
+        on_conflict: maoo_posts_on_conflict
+    ): maoo_posts
+    "insert a single row into the table: \"maoo.profiles\""
+    create_profile(
+        "the row to be inserted"
+        object: maoo_profiles_insert_input!,
+        "on conflict condition"
+        on_conflict: maoo_profiles_on_conflict
+    ): maoo_profiles
+    "insert a single row into the table: \"maoo.users\""
+    create_user(
+        "the row to be inserted"
+        object: maoo_users_insert_input!,
+        "on conflict condition"
+        on_conflict: maoo_users_on_conflict
+    ): maoo_users
+    "delete data from the table: \"maoo.owner_profiles\""
+    delete_maoo_owner_profiles(
+        "filter the rows which have to be deleted"
+        where: maoo_owner_profiles_bool_exp!
+    ): maoo_owner_profiles_mutation_response
+    "delete single row from the table: \"maoo.owner_profiles\""
+    delete_maoo_owner_profiles_by_pk(profile_id: uuid!): maoo_owner_profiles
+    "delete data from the table: \"maoo.pet_profiles\""
+    delete_maoo_pet_profiles(
+        "filter the rows which have to be deleted"
+        where: maoo_pet_profiles_bool_exp!
+    ): maoo_pet_profiles_mutation_response
+    "delete single row from the table: \"maoo.pet_profiles\""
+    delete_maoo_pet_profiles_by_pk(id: uuid!): maoo_pet_profiles
+    "delete data from the table: \"maoo.post_resource\""
+    delete_maoo_post_resource(
+        "filter the rows which have to be deleted"
+        where: maoo_post_resource_bool_exp!
+    ): maoo_post_resource_mutation_response
+    "delete single row from the table: \"maoo.post_resource\""
+    delete_maoo_post_resource_by_pk(id: uuid!): maoo_post_resource
+    "delete data from the table: \"maoo.post_revision\""
+    delete_maoo_post_revision(
+        "filter the rows which have to be deleted"
+        where: maoo_post_revision_bool_exp!
+    ): maoo_post_revision_mutation_response
+    "delete single row from the table: \"maoo.post_revision\""
+    delete_maoo_post_revision_by_pk(id: uuid!): maoo_post_revision
+    "delete data from the table: \"maoo.posts\""
+    delete_maoo_posts(
+        "filter the rows which have to be deleted"
+        where: maoo_posts_bool_exp!
+    ): maoo_posts_mutation_response
+    "delete single row from the table: \"maoo.posts\""
+    delete_maoo_posts_by_pk(id: uuid!): maoo_posts
+    "delete data from the table: \"maoo.profiles\""
+    delete_maoo_profiles(
+        "filter the rows which have to be deleted"
+        where: maoo_profiles_bool_exp!
+    ): maoo_profiles_mutation_response
+    "delete single row from the table: \"maoo.profiles\""
+    delete_maoo_profiles_by_pk(id: uuid!): maoo_profiles
+    "delete data from the table: \"maoo.users\""
+    delete_maoo_users(
+        "filter the rows which have to be deleted"
+        where: maoo_users_bool_exp!
+    ): maoo_users_mutation_response
+    "delete single row from the table: \"maoo.users\""
+    delete_user(id: String!): maoo_users
+    "insert data into the table: \"maoo.owner_profiles\""
+    insert_maoo_owner_profiles(
+        "the rows to be inserted"
+        objects: [maoo_owner_profiles_insert_input!]!,
+        "on conflict condition"
+        on_conflict: maoo_owner_profiles_on_conflict
+    ): maoo_owner_profiles_mutation_response
+    "insert data into the table: \"maoo.pet_profiles\""
+    insert_maoo_pet_profiles(
+        "the rows to be inserted"
+        objects: [maoo_pet_profiles_insert_input!]!,
+        "on conflict condition"
+        on_conflict: maoo_pet_profiles_on_conflict
+    ): maoo_pet_profiles_mutation_response
+    "insert data into the table: \"maoo.post_resource\""
+    insert_maoo_post_resource(
+        "the rows to be inserted"
+        objects: [maoo_post_resource_insert_input!]!,
+        "on conflict condition"
+        on_conflict: maoo_post_resource_on_conflict
+    ): maoo_post_resource_mutation_response
+    "insert a single row into the table: \"maoo.post_resource\""
+    insert_maoo_post_resource_one(
+        "the row to be inserted"
+        object: maoo_post_resource_insert_input!,
+        "on conflict condition"
+        on_conflict: maoo_post_resource_on_conflict
+    ): maoo_post_resource
+    "insert data into the table: \"maoo.post_revision\""
+    insert_maoo_post_revision(
+        "the rows to be inserted"
+        objects: [maoo_post_revision_insert_input!]!,
+        "on conflict condition"
+        on_conflict: maoo_post_revision_on_conflict
+    ): maoo_post_revision_mutation_response
+    "insert a single row into the table: \"maoo.post_revision\""
+    insert_maoo_post_revision_one(
+        "the row to be inserted"
+        object: maoo_post_revision_insert_input!,
+        "on conflict condition"
+        on_conflict: maoo_post_revision_on_conflict
+    ): maoo_post_revision
+    "insert data into the table: \"maoo.posts\""
+    insert_maoo_posts(
+        "the rows to be inserted"
+        objects: [maoo_posts_insert_input!]!,
+        "on conflict condition"
+        on_conflict: maoo_posts_on_conflict
+    ): maoo_posts_mutation_response
+    "insert data into the table: \"maoo.profiles\""
+    insert_maoo_profiles(
+        "the rows to be inserted"
+        objects: [maoo_profiles_insert_input!]!,
+        "on conflict condition"
+        on_conflict: maoo_profiles_on_conflict
+    ): maoo_profiles_mutation_response
+    "insert data into the table: \"maoo.users\""
+    insert_maoo_users(
+        "the rows to be inserted"
+        objects: [maoo_users_insert_input!]!,
+        "on conflict condition"
+        on_conflict: maoo_users_on_conflict
+    ): maoo_users_mutation_response
+    "update data of the table: \"maoo.owner_profiles\""
+    update_maoo_owner_profiles(
+        "sets the columns of the filtered rows to the given values"
+        _set: maoo_owner_profiles_set_input,
+        "filter the rows which have to be updated"
+        where: maoo_owner_profiles_bool_exp!
+    ): maoo_owner_profiles_mutation_response
+    "update single row of the table: \"maoo.owner_profiles\""
+    update_maoo_owner_profiles_by_pk(
+        "sets the columns of the filtered rows to the given values"
+        _set: maoo_owner_profiles_set_input,
+        pk_columns: maoo_owner_profiles_pk_columns_input!
+    ): maoo_owner_profiles
+    "update data of the table: \"maoo.pet_profiles\""
+    update_maoo_pet_profiles(
+        "sets the columns of the filtered rows to the given values"
+        _set: maoo_pet_profiles_set_input,
+        "filter the rows which have to be updated"
+        where: maoo_pet_profiles_bool_exp!
+    ): maoo_pet_profiles_mutation_response
+    "update single row of the table: \"maoo.pet_profiles\""
+    update_maoo_pet_profiles_by_pk(
+        "sets the columns of the filtered rows to the given values"
+        _set: maoo_pet_profiles_set_input,
+        pk_columns: maoo_pet_profiles_pk_columns_input!
+    ): maoo_pet_profiles
+    "update data of the table: \"maoo.post_resource\""
+    update_maoo_post_resource(
+        "sets the columns of the filtered rows to the given values"
+        _set: maoo_post_resource_set_input,
+        "filter the rows which have to be updated"
+        where: maoo_post_resource_bool_exp!
+    ): maoo_post_resource_mutation_response
+    "update single row of the table: \"maoo.post_resource\""
+    update_maoo_post_resource_by_pk(
+        "sets the columns of the filtered rows to the given values"
+        _set: maoo_post_resource_set_input,
+        pk_columns: maoo_post_resource_pk_columns_input!
+    ): maoo_post_resource
+    "update data of the table: \"maoo.post_revision\""
+    update_maoo_post_revision(
+        "sets the columns of the filtered rows to the given values"
+        _set: maoo_post_revision_set_input,
+        "filter the rows which have to be updated"
+        where: maoo_post_revision_bool_exp!
+    ): maoo_post_revision_mutation_response
+    "update single row of the table: \"maoo.post_revision\""
+    update_maoo_post_revision_by_pk(
+        "sets the columns of the filtered rows to the given values"
+        _set: maoo_post_revision_set_input,
+        pk_columns: maoo_post_revision_pk_columns_input!
+    ): maoo_post_revision
+    "update data of the table: \"maoo.posts\""
+    update_maoo_posts(
+        "sets the columns of the filtered rows to the given values"
+        _set: maoo_posts_set_input,
+        "filter the rows which have to be updated"
+        where: maoo_posts_bool_exp!
+    ): maoo_posts_mutation_response
+    "update single row of the table: \"maoo.posts\""
+    update_maoo_posts_by_pk(
+        "sets the columns of the filtered rows to the given values"
+        _set: maoo_posts_set_input,
+        pk_columns: maoo_posts_pk_columns_input!
+    ): maoo_posts
+    "update data of the table: \"maoo.profiles\""
+    update_maoo_profiles(
+        "increments the integer columns with given value of the filtered values"
+        _inc: maoo_profiles_inc_input,
+        "sets the columns of the filtered rows to the given values"
+        _set: maoo_profiles_set_input,
+        "filter the rows which have to be updated"
+        where: maoo_profiles_bool_exp!
+    ): maoo_profiles_mutation_response
+    "update single row of the table: \"maoo.profiles\""
+    update_maoo_profiles_by_pk(
+        "increments the integer columns with given value of the filtered values"
+        _inc: maoo_profiles_inc_input,
+        "sets the columns of the filtered rows to the given values"
+        _set: maoo_profiles_set_input,
+        pk_columns: maoo_profiles_pk_columns_input!
+    ): maoo_profiles
+    "update data of the table: \"maoo.users\""
+    update_maoo_users(
+        "sets the columns of the filtered rows to the given values"
+        _set: maoo_users_set_input,
+        "filter the rows which have to be updated"
+        where: maoo_users_bool_exp!
+    ): maoo_users_mutation_response
+    "update single row of the table: \"maoo.users\""
+    update_user(
+        "sets the columns of the filtered rows to the given values"
+        _set: maoo_users_set_input,
+        pk_columns: maoo_users_pk_columns_input!
+    ): maoo_users
+}
+
+"query root"
+type query_root {
+    "fetch aggregated fields from the table: \"maoo.owner_profiles\""
+    maoo_owner_profiles_aggregate(
+        "distinct select on columns"
+        distinct_on: [maoo_owner_profiles_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_owner_profiles_order_by!],
+        "filter the rows returned"
+        where: maoo_owner_profiles_bool_exp
+    ): maoo_owner_profiles_aggregate!
+    "fetch aggregated fields from the table: \"maoo.pet_profiles\""
+    maoo_pet_profiles_aggregate(
+        "distinct select on columns"
+        distinct_on: [maoo_pet_profiles_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_pet_profiles_order_by!],
+        "filter the rows returned"
+        where: maoo_pet_profiles_bool_exp
+    ): maoo_pet_profiles_aggregate!
+    "fetch aggregated fields from the table: \"maoo.post_resource\""
+    maoo_post_resource_aggregate(
+        "distinct select on columns"
+        distinct_on: [maoo_post_resource_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_post_resource_order_by!],
+        "filter the rows returned"
+        where: maoo_post_resource_bool_exp
+    ): maoo_post_resource_aggregate!
+    "fetch data from the table: \"maoo.post_resource\" using primary key columns"
+    maoo_post_resource_by_pk(id: uuid!): maoo_post_resource
+    "fetch aggregated fields from the table: \"maoo.post_revision\""
+    maoo_post_revision_aggregate(
+        "distinct select on columns"
+        distinct_on: [maoo_post_revision_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_post_revision_order_by!],
+        "filter the rows returned"
+        where: maoo_post_revision_bool_exp
+    ): maoo_post_revision_aggregate!
+    "fetch data from the table: \"maoo.post_revision\" using primary key columns"
+    maoo_post_revision_by_pk(id: uuid!): maoo_post_revision
+    "fetch aggregated fields from the table: \"maoo.posts\""
+    maoo_posts_aggregate(
+        "distinct select on columns"
+        distinct_on: [maoo_posts_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_posts_order_by!],
+        "filter the rows returned"
+        where: maoo_posts_bool_exp
+    ): maoo_posts_aggregate!
+    "fetch aggregated fields from the table: \"maoo.profiles\""
+    maoo_profiles_aggregate(
+        "distinct select on columns"
+        distinct_on: [maoo_profiles_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_profiles_order_by!],
+        "filter the rows returned"
+        where: maoo_profiles_bool_exp
+    ): maoo_profiles_aggregate!
+    "fetch aggregated fields from the table: \"maoo.users\""
+    maoo_users_aggregate(
+        "distinct select on columns"
+        distinct_on: [maoo_users_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_users_order_by!],
+        "filter the rows returned"
+        where: maoo_users_bool_exp
+    ): maoo_users_aggregate!
+    "fetch data from the table: \"maoo.owner_profiles\" using primary key columns"
+    owner_profile(profile_id: uuid!): maoo_owner_profiles
+    "fetch data from the table: \"maoo.owner_profiles\""
+    owner_profiles(
+        "distinct select on columns"
+        distinct_on: [maoo_owner_profiles_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_owner_profiles_order_by!],
+        "filter the rows returned"
+        where: maoo_owner_profiles_bool_exp
+    ): [maoo_owner_profiles!]!
+    "fetch data from the table: \"maoo.pet_profiles\" using primary key columns"
+    pet_profile(id: uuid!): maoo_pet_profiles
+    "fetch data from the table: \"maoo.pet_profiles\""
+    pet_profiles(
+        "distinct select on columns"
+        distinct_on: [maoo_pet_profiles_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_pet_profiles_order_by!],
+        "filter the rows returned"
+        where: maoo_pet_profiles_bool_exp
+    ): [maoo_pet_profiles!]!
+    "fetch data from the table: \"maoo.posts\" using primary key columns"
+    post(id: uuid!): maoo_posts
+    "fetch data from the table: \"maoo.post_resource\""
+    post_resources(
+        "distinct select on columns"
+        distinct_on: [maoo_post_resource_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_post_resource_order_by!],
+        "filter the rows returned"
+        where: maoo_post_resource_bool_exp
+    ): [maoo_post_resource!]!
+    "fetch data from the table: \"maoo.post_revision\""
+    post_revisions(
+        "distinct select on columns"
+        distinct_on: [maoo_post_revision_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_post_revision_order_by!],
+        "filter the rows returned"
+        where: maoo_post_revision_bool_exp
+    ): [maoo_post_revision!]!
+    "fetch data from the table: \"maoo.posts\""
+    posts(
+        "distinct select on columns"
+        distinct_on: [maoo_posts_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_posts_order_by!],
+        "filter the rows returned"
+        where: maoo_posts_bool_exp
+    ): [maoo_posts!]!
+    "fetch data from the table: \"maoo.profiles\" using primary key columns"
+    profile(id: uuid!): maoo_profiles
+    "fetch data from the table: \"maoo.profiles\""
+    profiles(
+        "distinct select on columns"
+        distinct_on: [maoo_profiles_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_profiles_order_by!],
+        "filter the rows returned"
+        where: maoo_profiles_bool_exp
+    ): [maoo_profiles!]!
+    "fetch data from the table: \"maoo.users\" using primary key columns"
+    user(id: String!): maoo_users
+    "fetch data from the table: \"maoo.users\""
+    users(
+        "distinct select on columns"
+        distinct_on: [maoo_users_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_users_order_by!],
+        "filter the rows returned"
+        where: maoo_users_bool_exp
+    ): [maoo_users!]!
+}
+
+"subscription root"
+type subscription_root {
+    "fetch aggregated fields from the table: \"maoo.owner_profiles\""
+    maoo_owner_profiles_aggregate(
+        "distinct select on columns"
+        distinct_on: [maoo_owner_profiles_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_owner_profiles_order_by!],
+        "filter the rows returned"
+        where: maoo_owner_profiles_bool_exp
+    ): maoo_owner_profiles_aggregate!
+    "fetch aggregated fields from the table: \"maoo.pet_profiles\""
+    maoo_pet_profiles_aggregate(
+        "distinct select on columns"
+        distinct_on: [maoo_pet_profiles_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_pet_profiles_order_by!],
+        "filter the rows returned"
+        where: maoo_pet_profiles_bool_exp
+    ): maoo_pet_profiles_aggregate!
+    "fetch aggregated fields from the table: \"maoo.post_resource\""
+    maoo_post_resource_aggregate(
+        "distinct select on columns"
+        distinct_on: [maoo_post_resource_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_post_resource_order_by!],
+        "filter the rows returned"
+        where: maoo_post_resource_bool_exp
+    ): maoo_post_resource_aggregate!
+    "fetch data from the table: \"maoo.post_resource\" using primary key columns"
+    maoo_post_resource_by_pk(id: uuid!): maoo_post_resource
+    "fetch aggregated fields from the table: \"maoo.post_revision\""
+    maoo_post_revision_aggregate(
+        "distinct select on columns"
+        distinct_on: [maoo_post_revision_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_post_revision_order_by!],
+        "filter the rows returned"
+        where: maoo_post_revision_bool_exp
+    ): maoo_post_revision_aggregate!
+    "fetch data from the table: \"maoo.post_revision\" using primary key columns"
+    maoo_post_revision_by_pk(id: uuid!): maoo_post_revision
+    "fetch aggregated fields from the table: \"maoo.posts\""
+    maoo_posts_aggregate(
+        "distinct select on columns"
+        distinct_on: [maoo_posts_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_posts_order_by!],
+        "filter the rows returned"
+        where: maoo_posts_bool_exp
+    ): maoo_posts_aggregate!
+    "fetch aggregated fields from the table: \"maoo.profiles\""
+    maoo_profiles_aggregate(
+        "distinct select on columns"
+        distinct_on: [maoo_profiles_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_profiles_order_by!],
+        "filter the rows returned"
+        where: maoo_profiles_bool_exp
+    ): maoo_profiles_aggregate!
+    "fetch aggregated fields from the table: \"maoo.users\""
+    maoo_users_aggregate(
+        "distinct select on columns"
+        distinct_on: [maoo_users_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_users_order_by!],
+        "filter the rows returned"
+        where: maoo_users_bool_exp
+    ): maoo_users_aggregate!
+    "fetch data from the table: \"maoo.owner_profiles\" using primary key columns"
+    owner_profile(profile_id: uuid!): maoo_owner_profiles
+    "fetch data from the table: \"maoo.owner_profiles\""
+    owner_profiles(
+        "distinct select on columns"
+        distinct_on: [maoo_owner_profiles_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_owner_profiles_order_by!],
+        "filter the rows returned"
+        where: maoo_owner_profiles_bool_exp
+    ): [maoo_owner_profiles!]!
+    "fetch data from the table: \"maoo.pet_profiles\" using primary key columns"
+    pet_profile(id: uuid!): maoo_pet_profiles
+    "fetch data from the table: \"maoo.pet_profiles\""
+    pet_profiles(
+        "distinct select on columns"
+        distinct_on: [maoo_pet_profiles_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_pet_profiles_order_by!],
+        "filter the rows returned"
+        where: maoo_pet_profiles_bool_exp
+    ): [maoo_pet_profiles!]!
+    "fetch data from the table: \"maoo.posts\" using primary key columns"
+    post(id: uuid!): maoo_posts
+    "fetch data from the table: \"maoo.post_resource\""
+    post_resources(
+        "distinct select on columns"
+        distinct_on: [maoo_post_resource_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_post_resource_order_by!],
+        "filter the rows returned"
+        where: maoo_post_resource_bool_exp
+    ): [maoo_post_resource!]!
+    "fetch data from the table: \"maoo.post_revision\""
+    post_revisions(
+        "distinct select on columns"
+        distinct_on: [maoo_post_revision_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_post_revision_order_by!],
+        "filter the rows returned"
+        where: maoo_post_revision_bool_exp
+    ): [maoo_post_revision!]!
+    "fetch data from the table: \"maoo.posts\""
+    posts(
+        "distinct select on columns"
+        distinct_on: [maoo_posts_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_posts_order_by!],
+        "filter the rows returned"
+        where: maoo_posts_bool_exp
+    ): [maoo_posts!]!
+    "fetch data from the table: \"maoo.profiles\" using primary key columns"
+    profile(id: uuid!): maoo_profiles
+    "fetch data from the table: \"maoo.profiles\""
+    profiles(
+        "distinct select on columns"
+        distinct_on: [maoo_profiles_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_profiles_order_by!],
+        "filter the rows returned"
+        where: maoo_profiles_bool_exp
+    ): [maoo_profiles!]!
+    "fetch data from the table: \"maoo.users\" using primary key columns"
+    user(id: String!): maoo_users
+    "fetch data from the table: \"maoo.users\""
+    users(
+        "distinct select on columns"
+        distinct_on: [maoo_users_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [maoo_users_order_by!],
+        "filter the rows returned"
+        where: maoo_users_bool_exp
+    ): [maoo_users!]!
+}
+
+"unique or primary key constraints on table \"maoo.owner_profiles\""
+enum maoo_owner_profiles_constraint {
+    "unique or primary key constraint"
+    owner_profiles_id_key
+    "unique or primary key constraint"
+    owner_profiles_pk
+    "unique or primary key constraint"
+    owner_profiles_profile_id_uindex
+}
+
+"select columns of table \"maoo.owner_profiles\""
+enum maoo_owner_profiles_select_column {
+    "column name"
+    description
+    "column name"
+    id
+    "column name"
+    profile_id
+}
+
+"update columns of table \"maoo.owner_profiles\""
+enum maoo_owner_profiles_update_column {
+    "column name"
+    description
+    "column name"
+    id
+    "column name"
+    profile_id
+}
+
+"unique or primary key constraints on table \"maoo.pet_profiles\""
+enum maoo_pet_profiles_constraint {
+    "unique or primary key constraint"
+    pet_profiles_id_key
+    "unique or primary key constraint"
+    pet_profiles_pkey
+    "unique or primary key constraint"
+    pet_profiles_profile_id_uindex
+}
+
+"select columns of table \"maoo.pet_profiles\""
+enum maoo_pet_profiles_select_column {
+    "column name"
+    breed
+    "column name"
+    coat
+    "column name"
+    color
+    "column name"
+    id
+    "column name"
+    profile_id
+}
+
+"update columns of table \"maoo.pet_profiles\""
+enum maoo_pet_profiles_update_column {
+    "column name"
+    breed
+    "column name"
+    coat
+    "column name"
+    color
+    "column name"
+    id
+    "column name"
+    profile_id
+}
+
+"unique or primary key constraints on table \"maoo.post_resource\""
+enum maoo_post_resource_constraint {
+    "unique or primary key constraint"
+    post_resource_id_key
+    "unique or primary key constraint"
+    post_resource_pkey
+}
+
+"select columns of table \"maoo.post_resource\""
+enum maoo_post_resource_select_column {
+    "column name"
+    created_at
+    "column name"
+    id
+    "column name"
+    instruction
+    "column name"
+    link
+    "column name"
+    post_id
+}
+
+"update columns of table \"maoo.post_resource\""
+enum maoo_post_resource_update_column {
+    "column name"
+    created_at
+    "column name"
+    id
+    "column name"
+    instruction
+    "column name"
+    link
+    "column name"
+    post_id
+}
+
+"unique or primary key constraints on table \"maoo.post_revision\""
+enum maoo_post_revision_constraint {
+    "unique or primary key constraint"
+    post_revision_id_key
+    "unique or primary key constraint"
+    post_revision_pkey
+}
+
+"select columns of table \"maoo.post_revision\""
+enum maoo_post_revision_select_column {
+    "column name"
+    body
+    "column name"
+    id
+    "column name"
+    post_id
+    "column name"
+    updated_at
+}
+
+"update columns of table \"maoo.post_revision\""
+enum maoo_post_revision_update_column {
+    "column name"
+    body
+    "column name"
+    id
+    "column name"
+    post_id
+    "column name"
+    updated_at
+}
+
+"unique or primary key constraints on table \"maoo.posts\""
+enum maoo_posts_constraint {
+    "unique or primary key constraint"
+    posts_id_key
+    "unique or primary key constraint"
+    posts_pkey
+}
+
+"select columns of table \"maoo.posts\""
+enum maoo_posts_select_column {
+    "column name"
+    created_at
+    "column name"
+    id
+    "column name"
+    profile_id
+}
+
+"update columns of table \"maoo.posts\""
+enum maoo_posts_update_column {
+    "column name"
+    created_at
+    "column name"
+    id
+    "column name"
+    profile_id
+}
+
+"unique or primary key constraints on table \"maoo.profiles\""
+enum maoo_profiles_constraint {
+    "unique or primary key constraint"
+    profiles_id_key
+    "unique or primary key constraint"
+    profiles_pkey
+}
+
+"select columns of table \"maoo.profiles\""
+enum maoo_profiles_select_column {
+    "column name"
+    birthdate
+    "column name"
+    gender
+    "column name"
+    id
+    "column name"
+    name_first
+    "column name"
+    name_last
+    "column name"
+    type
+    "column name"
+    user_id
+}
+
+"update columns of table \"maoo.profiles\""
+enum maoo_profiles_update_column {
+    "column name"
+    birthdate
+    "column name"
+    gender
+    "column name"
+    id
+    "column name"
+    name_first
+    "column name"
+    name_last
+    "column name"
+    type
+    "column name"
+    user_id
+}
+
+"unique or primary key constraints on table \"maoo.users\""
+enum maoo_users_constraint {
+    "unique or primary key constraint"
+    users_id_key
+    "unique or primary key constraint"
+    users_name_user_key
+    "unique or primary key constraint"
+    users_name_user_uindex
+    "unique or primary key constraint"
+    users_pkey
+}
+
+"select columns of table \"maoo.users\""
+enum maoo_users_select_column {
+    "column name"
+    created_at
+    "column name"
+    email
+    "column name"
+    id
+    "column name"
+    name_user
+    "column name"
+    updated_at
+}
+
+"update columns of table \"maoo.users\""
+enum maoo_users_update_column {
+    "column name"
+    created_at
+    "column name"
+    email
+    "column name"
+    id
+    "column name"
+    name_user
+    "column name"
+    updated_at
+}
+
+"column ordering options"
+enum order_by {
+    "in the ascending order, nulls last"
+    asc
+    "in the ascending order, nulls first"
+    asc_nulls_first
+    "in the ascending order, nulls last"
+    asc_nulls_last
+    "in the descending order, nulls first"
+    desc
+    "in the descending order, nulls first"
+    desc_nulls_first
+    "in the descending order, nulls last"
+    desc_nulls_last
+}
+
+"expression to compare columns of type Int. All fields are combined with logical 'AND'."
+input Int_comparison_exp {
+    _eq: Int
+    _gt: Int
+    _gte: Int
+    _in: [Int!]
+    _is_null: Boolean
+    _lt: Int
+    _lte: Int
+    _neq: Int
+    _nin: [Int!]
+}
+
+"expression to compare columns of type String. All fields are combined with logical 'AND'."
+input String_comparison_exp {
+    _eq: String
+    _gt: String
+    _gte: String
+    _ilike: String
+    _in: [String!]
+    _is_null: Boolean
+    _like: String
+    _lt: String
+    _lte: String
+    _neq: String
+    _nilike: String
+    _nin: [String!]
+    _nlike: String
+    _nsimilar: String
+    _similar: String
+}
+
+"expression to compare columns of type date. All fields are combined with logical 'AND'."
+input date_comparison_exp {
+    _eq: date
+    _gt: date
+    _gte: date
+    _in: [date!]
+    _is_null: Boolean
+    _lt: date
+    _lte: date
+    _neq: date
+    _nin: [date!]
+}
+
+"order by aggregate values of table \"maoo.owner_profiles\""
+input maoo_owner_profiles_aggregate_order_by {
+    count: order_by
+    max: maoo_owner_profiles_max_order_by
+    min: maoo_owner_profiles_min_order_by
+}
+
+"input type for inserting array relation for remote table \"maoo.owner_profiles\""
+input maoo_owner_profiles_arr_rel_insert_input {
+    data: [maoo_owner_profiles_insert_input!]!
+    on_conflict: maoo_owner_profiles_on_conflict
+}
+
+"Boolean expression to filter rows from the table \"maoo.owner_profiles\". All fields are combined with a logical 'AND'."
+input maoo_owner_profiles_bool_exp {
+    _and: [maoo_owner_profiles_bool_exp]
+    _not: maoo_owner_profiles_bool_exp
+    _or: [maoo_owner_profiles_bool_exp]
+    description: String_comparison_exp
+    id: uuid_comparison_exp
+    profile_id: uuid_comparison_exp
+}
+
+"input type for inserting data into table \"maoo.owner_profiles\""
+input maoo_owner_profiles_insert_input {
+    description: String
+    id: uuid
+    profile_id: uuid
+}
+
+"order by max() on columns of table \"maoo.owner_profiles\""
+input maoo_owner_profiles_max_order_by {
+    description: order_by
+    id: order_by
+    profile_id: order_by
+}
+
+"order by min() on columns of table \"maoo.owner_profiles\""
+input maoo_owner_profiles_min_order_by {
+    description: order_by
+    id: order_by
+    profile_id: order_by
+}
+
+"input type for inserting object relation for remote table \"maoo.owner_profiles\""
+input maoo_owner_profiles_obj_rel_insert_input {
+    data: maoo_owner_profiles_insert_input!
+    on_conflict: maoo_owner_profiles_on_conflict
+}
+
+"on conflict condition type for table \"maoo.owner_profiles\""
+input maoo_owner_profiles_on_conflict {
+    constraint: maoo_owner_profiles_constraint!
+    update_columns: [maoo_owner_profiles_update_column!]!
+    where: maoo_owner_profiles_bool_exp
+}
+
+"ordering options when selecting data from \"maoo.owner_profiles\""
+input maoo_owner_profiles_order_by {
+    description: order_by
+    id: order_by
+    profile_id: order_by
+}
+
+"primary key columns input for table: \"maoo.owner_profiles\""
+input maoo_owner_profiles_pk_columns_input {
+    profile_id: uuid!
+}
+
+"input type for updating data in table \"maoo.owner_profiles\""
+input maoo_owner_profiles_set_input {
+    description: String
+    id: uuid
+    profile_id: uuid
+}
+
+"order by aggregate values of table \"maoo.pet_profiles\""
+input maoo_pet_profiles_aggregate_order_by {
+    count: order_by
+    max: maoo_pet_profiles_max_order_by
+    min: maoo_pet_profiles_min_order_by
+}
+
+"input type for inserting array relation for remote table \"maoo.pet_profiles\""
+input maoo_pet_profiles_arr_rel_insert_input {
+    data: [maoo_pet_profiles_insert_input!]!
+    on_conflict: maoo_pet_profiles_on_conflict
+}
+
+"Boolean expression to filter rows from the table \"maoo.pet_profiles\". All fields are combined with a logical 'AND'."
+input maoo_pet_profiles_bool_exp {
+    _and: [maoo_pet_profiles_bool_exp]
+    _not: maoo_pet_profiles_bool_exp
+    _or: [maoo_pet_profiles_bool_exp]
+    breed: String_comparison_exp
+    coat: String_comparison_exp
+    color: String_comparison_exp
+    id: uuid_comparison_exp
+    profile_id: uuid_comparison_exp
+}
+
+"input type for inserting data into table \"maoo.pet_profiles\""
+input maoo_pet_profiles_insert_input {
+    breed: String
+    coat: String
+    color: String
+    id: uuid
+    profile_id: uuid
+}
+
+"order by max() on columns of table \"maoo.pet_profiles\""
+input maoo_pet_profiles_max_order_by {
+    breed: order_by
+    coat: order_by
+    color: order_by
+    id: order_by
+    profile_id: order_by
+}
+
+"order by min() on columns of table \"maoo.pet_profiles\""
+input maoo_pet_profiles_min_order_by {
+    breed: order_by
+    coat: order_by
+    color: order_by
+    id: order_by
+    profile_id: order_by
+}
+
+"input type for inserting object relation for remote table \"maoo.pet_profiles\""
+input maoo_pet_profiles_obj_rel_insert_input {
+    data: maoo_pet_profiles_insert_input!
+    on_conflict: maoo_pet_profiles_on_conflict
+}
+
+"on conflict condition type for table \"maoo.pet_profiles\""
+input maoo_pet_profiles_on_conflict {
+    constraint: maoo_pet_profiles_constraint!
+    update_columns: [maoo_pet_profiles_update_column!]!
+    where: maoo_pet_profiles_bool_exp
+}
+
+"ordering options when selecting data from \"maoo.pet_profiles\""
+input maoo_pet_profiles_order_by {
+    breed: order_by
+    coat: order_by
+    color: order_by
+    id: order_by
+    profile_id: order_by
+}
+
+"primary key columns input for table: \"maoo.pet_profiles\""
+input maoo_pet_profiles_pk_columns_input {
+    id: uuid!
+}
+
+"input type for updating data in table \"maoo.pet_profiles\""
+input maoo_pet_profiles_set_input {
+    breed: String
+    coat: String
+    color: String
+    id: uuid
+    profile_id: uuid
+}
+
+"order by aggregate values of table \"maoo.post_resource\""
+input maoo_post_resource_aggregate_order_by {
+    count: order_by
+    max: maoo_post_resource_max_order_by
+    min: maoo_post_resource_min_order_by
+}
+
+"input type for inserting array relation for remote table \"maoo.post_resource\""
+input maoo_post_resource_arr_rel_insert_input {
+    data: [maoo_post_resource_insert_input!]!
+    on_conflict: maoo_post_resource_on_conflict
+}
+
+"Boolean expression to filter rows from the table \"maoo.post_resource\". All fields are combined with a logical 'AND'."
+input maoo_post_resource_bool_exp {
+    _and: [maoo_post_resource_bool_exp]
+    _not: maoo_post_resource_bool_exp
+    _or: [maoo_post_resource_bool_exp]
+    created_at: timestamp_comparison_exp
+    id: uuid_comparison_exp
+    instruction: String_comparison_exp
+    link: String_comparison_exp
+    post_id: uuid_comparison_exp
+}
+
+"input type for inserting data into table \"maoo.post_resource\""
+input maoo_post_resource_insert_input {
+    created_at: timestamp
+    id: uuid
+    instruction: String
+    link: String
+    post_id: uuid
+}
+
+"order by max() on columns of table \"maoo.post_resource\""
+input maoo_post_resource_max_order_by {
+    created_at: order_by
+    id: order_by
+    instruction: order_by
+    link: order_by
+    post_id: order_by
+}
+
+"order by min() on columns of table \"maoo.post_resource\""
+input maoo_post_resource_min_order_by {
+    created_at: order_by
+    id: order_by
+    instruction: order_by
+    link: order_by
+    post_id: order_by
+}
+
+"input type for inserting object relation for remote table \"maoo.post_resource\""
+input maoo_post_resource_obj_rel_insert_input {
+    data: maoo_post_resource_insert_input!
+    on_conflict: maoo_post_resource_on_conflict
+}
+
+"on conflict condition type for table \"maoo.post_resource\""
+input maoo_post_resource_on_conflict {
+    constraint: maoo_post_resource_constraint!
+    update_columns: [maoo_post_resource_update_column!]!
+    where: maoo_post_resource_bool_exp
+}
+
+"ordering options when selecting data from \"maoo.post_resource\""
+input maoo_post_resource_order_by {
+    created_at: order_by
+    id: order_by
+    instruction: order_by
+    link: order_by
+    post_id: order_by
+}
+
+"primary key columns input for table: \"maoo.post_resource\""
+input maoo_post_resource_pk_columns_input {
+    id: uuid!
+}
+
+"input type for updating data in table \"maoo.post_resource\""
+input maoo_post_resource_set_input {
+    created_at: timestamp
+    id: uuid
+    instruction: String
+    link: String
+    post_id: uuid
+}
+
+"order by aggregate values of table \"maoo.post_revision\""
+input maoo_post_revision_aggregate_order_by {
+    count: order_by
+    max: maoo_post_revision_max_order_by
+    min: maoo_post_revision_min_order_by
+}
+
+"input type for inserting array relation for remote table \"maoo.post_revision\""
+input maoo_post_revision_arr_rel_insert_input {
+    data: [maoo_post_revision_insert_input!]!
+    on_conflict: maoo_post_revision_on_conflict
+}
+
+"Boolean expression to filter rows from the table \"maoo.post_revision\". All fields are combined with a logical 'AND'."
+input maoo_post_revision_bool_exp {
+    _and: [maoo_post_revision_bool_exp]
+    _not: maoo_post_revision_bool_exp
+    _or: [maoo_post_revision_bool_exp]
+    body: String_comparison_exp
+    id: uuid_comparison_exp
+    post_id: uuid_comparison_exp
+    updated_at: timestamp_comparison_exp
+}
+
+"input type for inserting data into table \"maoo.post_revision\""
+input maoo_post_revision_insert_input {
+    body: String
+    id: uuid
+    post_id: uuid
+    updated_at: timestamp
+}
+
+"order by max() on columns of table \"maoo.post_revision\""
+input maoo_post_revision_max_order_by {
+    body: order_by
+    id: order_by
+    post_id: order_by
+    updated_at: order_by
+}
+
+"order by min() on columns of table \"maoo.post_revision\""
+input maoo_post_revision_min_order_by {
+    body: order_by
+    id: order_by
+    post_id: order_by
+    updated_at: order_by
+}
+
+"input type for inserting object relation for remote table \"maoo.post_revision\""
+input maoo_post_revision_obj_rel_insert_input {
+    data: maoo_post_revision_insert_input!
+    on_conflict: maoo_post_revision_on_conflict
+}
+
+"on conflict condition type for table \"maoo.post_revision\""
+input maoo_post_revision_on_conflict {
+    constraint: maoo_post_revision_constraint!
+    update_columns: [maoo_post_revision_update_column!]!
+    where: maoo_post_revision_bool_exp
+}
+
+"ordering options when selecting data from \"maoo.post_revision\""
+input maoo_post_revision_order_by {
+    body: order_by
+    id: order_by
+    post_id: order_by
+    updated_at: order_by
+}
+
+"primary key columns input for table: \"maoo.post_revision\""
+input maoo_post_revision_pk_columns_input {
+    id: uuid!
+}
+
+"input type for updating data in table \"maoo.post_revision\""
+input maoo_post_revision_set_input {
+    body: String
+    id: uuid
+    post_id: uuid
+    updated_at: timestamp
+}
+
+"order by aggregate values of table \"maoo.posts\""
+input maoo_posts_aggregate_order_by {
+    count: order_by
+    max: maoo_posts_max_order_by
+    min: maoo_posts_min_order_by
+}
+
+"input type for inserting array relation for remote table \"maoo.posts\""
+input maoo_posts_arr_rel_insert_input {
+    data: [maoo_posts_insert_input!]!
+    on_conflict: maoo_posts_on_conflict
+}
+
+"Boolean expression to filter rows from the table \"maoo.posts\". All fields are combined with a logical 'AND'."
+input maoo_posts_bool_exp {
+    _and: [maoo_posts_bool_exp]
+    _not: maoo_posts_bool_exp
+    _or: [maoo_posts_bool_exp]
+    created_at: timestamp_comparison_exp
+    id: uuid_comparison_exp
+    profile: maoo_profiles_bool_exp
+    profile_id: uuid_comparison_exp
+    resources: maoo_post_resource_bool_exp
+    revisions: maoo_post_revision_bool_exp
+}
+
+"input type for inserting data into table \"maoo.posts\""
+input maoo_posts_insert_input {
+    created_at: timestamp
+    id: uuid
+    profile: maoo_profiles_obj_rel_insert_input
+    profile_id: uuid
+    resources: maoo_post_resource_arr_rel_insert_input
+    revisions: maoo_post_revision_arr_rel_insert_input
+}
+
+"order by max() on columns of table \"maoo.posts\""
+input maoo_posts_max_order_by {
+    created_at: order_by
+    id: order_by
+    profile_id: order_by
+}
+
+"order by min() on columns of table \"maoo.posts\""
+input maoo_posts_min_order_by {
+    created_at: order_by
+    id: order_by
+    profile_id: order_by
+}
+
+"input type for inserting object relation for remote table \"maoo.posts\""
+input maoo_posts_obj_rel_insert_input {
+    data: maoo_posts_insert_input!
+    on_conflict: maoo_posts_on_conflict
+}
+
+"on conflict condition type for table \"maoo.posts\""
+input maoo_posts_on_conflict {
+    constraint: maoo_posts_constraint!
+    update_columns: [maoo_posts_update_column!]!
+    where: maoo_posts_bool_exp
+}
+
+"ordering options when selecting data from \"maoo.posts\""
+input maoo_posts_order_by {
+    created_at: order_by
+    id: order_by
+    profile: maoo_profiles_order_by
+    profile_id: order_by
+    resources_aggregate: maoo_post_resource_aggregate_order_by
+    revisions_aggregate: maoo_post_revision_aggregate_order_by
+}
+
+"primary key columns input for table: \"maoo.posts\""
+input maoo_posts_pk_columns_input {
+    id: uuid!
+}
+
+"input type for updating data in table \"maoo.posts\""
+input maoo_posts_set_input {
+    created_at: timestamp
+    id: uuid
+    profile_id: uuid
+}
+
+"order by aggregate values of table \"maoo.profiles\""
+input maoo_profiles_aggregate_order_by {
+    avg: maoo_profiles_avg_order_by
+    count: order_by
+    max: maoo_profiles_max_order_by
+    min: maoo_profiles_min_order_by
+    stddev: maoo_profiles_stddev_order_by
+    stddev_pop: maoo_profiles_stddev_pop_order_by
+    stddev_samp: maoo_profiles_stddev_samp_order_by
+    sum: maoo_profiles_sum_order_by
+    var_pop: maoo_profiles_var_pop_order_by
+    var_samp: maoo_profiles_var_samp_order_by
+    variance: maoo_profiles_variance_order_by
+}
+
+"input type for inserting array relation for remote table \"maoo.profiles\""
+input maoo_profiles_arr_rel_insert_input {
+    data: [maoo_profiles_insert_input!]!
+    on_conflict: maoo_profiles_on_conflict
+}
+
+"order by avg() on columns of table \"maoo.profiles\""
+input maoo_profiles_avg_order_by {
+    type: order_by
+}
+
+"Boolean expression to filter rows from the table \"maoo.profiles\". All fields are combined with a logical 'AND'."
+input maoo_profiles_bool_exp {
+    _and: [maoo_profiles_bool_exp]
+    _not: maoo_profiles_bool_exp
+    _or: [maoo_profiles_bool_exp]
+    birthdate: date_comparison_exp
+    gender: String_comparison_exp
+    id: uuid_comparison_exp
+    name_first: String_comparison_exp
+    name_last: String_comparison_exp
+    owner: maoo_owner_profiles_bool_exp
+    pet: maoo_pet_profiles_bool_exp
+    posts: maoo_posts_bool_exp
+    type: Int_comparison_exp
+    user_id: String_comparison_exp
+}
+
+"input type for incrementing integer column in table \"maoo.profiles\""
+input maoo_profiles_inc_input {
+    type: Int
+}
+
+"input type for inserting data into table \"maoo.profiles\""
+input maoo_profiles_insert_input {
+    birthdate: date
+    gender: String
+    id: uuid
+    name_first: String
+    name_last: String
+    owner: maoo_owner_profiles_obj_rel_insert_input
+    pet: maoo_pet_profiles_obj_rel_insert_input
+    posts: maoo_posts_arr_rel_insert_input
+    type: Int
+    user_id: String
+}
+
+"order by max() on columns of table \"maoo.profiles\""
+input maoo_profiles_max_order_by {
+    birthdate: order_by
+    gender: order_by
+    id: order_by
+    name_first: order_by
+    name_last: order_by
+    type: order_by
+    user_id: order_by
+}
+
+"order by min() on columns of table \"maoo.profiles\""
+input maoo_profiles_min_order_by {
+    birthdate: order_by
+    gender: order_by
+    id: order_by
+    name_first: order_by
+    name_last: order_by
+    type: order_by
+    user_id: order_by
+}
+
+"input type for inserting object relation for remote table \"maoo.profiles\""
+input maoo_profiles_obj_rel_insert_input {
+    data: maoo_profiles_insert_input!
+    on_conflict: maoo_profiles_on_conflict
+}
+
+"on conflict condition type for table \"maoo.profiles\""
+input maoo_profiles_on_conflict {
+    constraint: maoo_profiles_constraint!
+    update_columns: [maoo_profiles_update_column!]!
+    where: maoo_profiles_bool_exp
+}
+
+"ordering options when selecting data from \"maoo.profiles\""
+input maoo_profiles_order_by {
+    birthdate: order_by
+    gender: order_by
+    id: order_by
+    name_first: order_by
+    name_last: order_by
+    owner: maoo_owner_profiles_order_by
+    pet: maoo_pet_profiles_order_by
+    posts_aggregate: maoo_posts_aggregate_order_by
+    type: order_by
+    user_id: order_by
+}
+
+"primary key columns input for table: \"maoo.profiles\""
+input maoo_profiles_pk_columns_input {
+    id: uuid!
+}
+
+"input type for updating data in table \"maoo.profiles\""
+input maoo_profiles_set_input {
+    birthdate: date
+    gender: String
+    id: uuid
+    name_first: String
+    name_last: String
+    type: Int
+    user_id: String
+}
+
+"order by stddev() on columns of table \"maoo.profiles\""
+input maoo_profiles_stddev_order_by {
+    type: order_by
+}
+
+"order by stddev_pop() on columns of table \"maoo.profiles\""
+input maoo_profiles_stddev_pop_order_by {
+    type: order_by
+}
+
+"order by stddev_samp() on columns of table \"maoo.profiles\""
+input maoo_profiles_stddev_samp_order_by {
+    type: order_by
+}
+
+"order by sum() on columns of table \"maoo.profiles\""
+input maoo_profiles_sum_order_by {
+    type: order_by
+}
+
+"order by var_pop() on columns of table \"maoo.profiles\""
+input maoo_profiles_var_pop_order_by {
+    type: order_by
+}
+
+"order by var_samp() on columns of table \"maoo.profiles\""
+input maoo_profiles_var_samp_order_by {
+    type: order_by
+}
+
+"order by variance() on columns of table \"maoo.profiles\""
+input maoo_profiles_variance_order_by {
+    type: order_by
+}
+
+"order by aggregate values of table \"maoo.users\""
+input maoo_users_aggregate_order_by {
+    count: order_by
+    max: maoo_users_max_order_by
+    min: maoo_users_min_order_by
+}
+
+"input type for inserting array relation for remote table \"maoo.users\""
+input maoo_users_arr_rel_insert_input {
+    data: [maoo_users_insert_input!]!
+    on_conflict: maoo_users_on_conflict
+}
+
+"Boolean expression to filter rows from the table \"maoo.users\". All fields are combined with a logical 'AND'."
+input maoo_users_bool_exp {
+    _and: [maoo_users_bool_exp]
+    _not: maoo_users_bool_exp
+    _or: [maoo_users_bool_exp]
+    created_at: timestamptz_comparison_exp
+    email: String_comparison_exp
+    id: String_comparison_exp
+    name_user: String_comparison_exp
+    profiles: maoo_profiles_bool_exp
+    updated_at: timestamptz_comparison_exp
+}
+
+"input type for inserting data into table \"maoo.users\""
+input maoo_users_insert_input {
+    created_at: timestamptz
+    email: String
+    id: String
+    name_user: String
+    profiles: maoo_profiles_arr_rel_insert_input
+    updated_at: timestamptz
+}
+
+"order by max() on columns of table \"maoo.users\""
+input maoo_users_max_order_by {
+    created_at: order_by
+    email: order_by
+    id: order_by
+    name_user: order_by
+    updated_at: order_by
+}
+
+"order by min() on columns of table \"maoo.users\""
+input maoo_users_min_order_by {
+    created_at: order_by
+    email: order_by
+    id: order_by
+    name_user: order_by
+    updated_at: order_by
+}
+
+"input type for inserting object relation for remote table \"maoo.users\""
+input maoo_users_obj_rel_insert_input {
+    data: maoo_users_insert_input!
+    on_conflict: maoo_users_on_conflict
+}
+
+"on conflict condition type for table \"maoo.users\""
+input maoo_users_on_conflict {
+    constraint: maoo_users_constraint!
+    update_columns: [maoo_users_update_column!]!
+    where: maoo_users_bool_exp
+}
+
+"ordering options when selecting data from \"maoo.users\""
+input maoo_users_order_by {
+    created_at: order_by
+    email: order_by
+    id: order_by
+    name_user: order_by
+    profiles_aggregate: maoo_profiles_aggregate_order_by
+    updated_at: order_by
+}
+
+"primary key columns input for table: \"maoo.users\""
+input maoo_users_pk_columns_input {
+    id: String!
+}
+
+"input type for updating data in table \"maoo.users\""
+input maoo_users_set_input {
+    created_at: timestamptz
+    email: String
+    id: String
+    name_user: String
+    updated_at: timestamptz
+}
+
+"expression to compare columns of type timestamp. All fields are combined with logical 'AND'."
+input timestamp_comparison_exp {
+    _eq: timestamp
+    _gt: timestamp
+    _gte: timestamp
+    _in: [timestamp!]
+    _is_null: Boolean
+    _lt: timestamp
+    _lte: timestamp
+    _neq: timestamp
+    _nin: [timestamp!]
+}
+
+"expression to compare columns of type timestamptz. All fields are combined with logical 'AND'."
+input timestamptz_comparison_exp {
+    _eq: timestamptz
+    _gt: timestamptz
+    _gte: timestamptz
+    _in: [timestamptz!]
+    _is_null: Boolean
+    _lt: timestamptz
+    _lte: timestamptz
+    _neq: timestamptz
+    _nin: [timestamptz!]
+}
+
+"expression to compare columns of type uuid. All fields are combined with logical 'AND'."
+input uuid_comparison_exp {
+    _eq: uuid
+    _gt: uuid
+    _gte: uuid
+    _in: [uuid!]
+    _is_null: Boolean
+    _lt: uuid
+    _lte: uuid
+    _neq: uuid
+    _nin: [uuid!]
+}
+
+
+scalar date
+
+scalar timestamp
+
+scalar timestamptz
+
+scalar uuid

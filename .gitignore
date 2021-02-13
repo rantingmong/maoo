@@ -12,8 +12,11 @@
 /captures
 .externalNativeBuild
 .cxx
+*.log
 
 .vercel
 node_modules
 public/program.js
+lib/
 .idea
+/src/generated/*.ts

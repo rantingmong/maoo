@@ -1,0 +1,26 @@
+query GetPosts {
+    posts {
+        id
+        created_at
+        profile {
+            name_first
+            name_last
+            owner {
+                description
+            }
+            pet {
+                breed
+                coat
+                color
+            }
+        }
+        revisions {
+            body
+            updated_at
+        }
+        resources {
+            link
+            instruction
+        }
+    }
+}
