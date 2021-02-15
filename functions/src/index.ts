@@ -71,7 +71,7 @@ export const createUser   = functions.auth.user().onCreate(async user => {
 
     const {data}    = await axios.request({
       method  : "POST",
-      url     : 'http://172.18.0.3:8080/v1/graphql',
+      url     : 'http://graphql-engine:8080/v1/graphql',
       data    : JSON.stringify(payload)
     })
 

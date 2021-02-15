@@ -20,3 +20,4 @@ public/program.js
 lib/
 .idea
 /src/generated/*.ts
+.config
