@@ -13,6 +13,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const firebase_auth = firebase.auth()
-firebase_auth.useEmulator('http://localhost:9099')
+firebase_auth.useEmulator('http://localhost:29099')
 
 export const auth = firebase_auth

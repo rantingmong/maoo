@@ -1,17 +1,15 @@
 <div class="setup-profile">
-  <h2>Setup your maoo profile!</h2>
+  <h2>1 - Setup your maoo profile</h2>
   <form>
-    <label> Username
+    <MaooInput label='Username'>
       <input type="text">
-    </label>
-    <br/>
-    <label> First Name
+    </MaooInput>
+    <MaooInput label='First Name'>
       <input type="text">
-    </label>
-    <br/>
-    <label> Last Name
+    </MaooInput>
+    <MaooInput label='Last Name'>
       <input type="text">
-    </label>
+    </MaooInput>
     <hr/>
     <label> Gender
       <select>
@@ -30,6 +28,7 @@
       <textarea></textarea>
     </label>
   </form>
+  <h2>2 - Add your furr-childs</h2>
 </div>
 <style>
   .setup-profile {
@@ -37,5 +36,5 @@
   }
 </style>
 <script lang="ts">
-
+  import MaooInput from '../../parts/maoo-input'
 </script>

@@ -1,5 +1,24 @@
 version: '3.6'
 services:
+  firebase:
+    build:
+      context: .
+      dockerfile: Dockerfile-firebase
+      args:
+        VERSION: 9.3.0
+    ports:
+    - "24000:24000"
+    - "25000:25000"
+    - "25001:25001"
+    - "28080:28080"
+    - "28085:28085"
+    - "29000:29000"
+    - "9005:9005"
+    - "29099:29099"
+    environment:
+      FIREBASE_TOOLS_VERSION: 9.3.0
+    volumes:
+    - .:/home/node
   postgres:
     image: postgres:12
     restart: always
@@ -22,6 +41,6 @@ services:
       HASURA_GRAPHQL_DEV_MODE: "true"
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       HASURA_GRAPHQL_ADMIN_SECRET: adminsecret
-      HASURA_GRAPHQL_AUTH_HOOK: http://host.docker.internal:5001/buslo-collective/us-central1/validateUser
+      HASURA_GRAPHQL_AUTH_HOOK: http://172.18.0.4:25001/buslo-collective/us-central1/validateUser
 volumes:
   db_data:

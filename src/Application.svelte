@@ -42,9 +42,10 @@
 
   .application--dialog-container {
     display: flex;
+    flex-direction: column;
 
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
 
     position: fixed;
     left: 0;
@@ -55,8 +56,8 @@
 
   .application--dialog-container > .inner {
     background-color: white;
-    min-width: 450px;
-    min-height: 350px;
+    min-width: 600px;
+    min-height: 75vh;
   }
 
   .application--dialog-container > .inner .content {
