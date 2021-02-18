@@ -1,5 +1,15 @@
 version: '3.6'
 services:
+  vercel:
+    build:
+      context: .
+      dockerfile: Dockerfile-vercel-dev
+    environment:
+      TOKEN: lWCzZfvEJY2HA6A20dMnuHRR
+    ports:
+      - "3000:3000"
+    volumes:
+    - .:/home/node
   firebase:
     build:
       context: .
@@ -41,6 +51,6 @@ services:
       HASURA_GRAPHQL_DEV_MODE: "true"
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       HASURA_GRAPHQL_ADMIN_SECRET: adminsecret
-      HASURA_GRAPHQL_AUTH_HOOK: http://firebase:25001/buslo-collective/us-central1/validateUser
+      HASURA_GRAPHQL_AUTH_HOOK: http://vercel:3000/api/user/validate
 volumes:
   db_data:

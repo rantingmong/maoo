@@ -1,0 +1,9 @@
+.dashboard--navigation {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.dashboard--navigation--menu {
+  font-family: sans-serif;
+}

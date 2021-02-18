@@ -2286,7 +2286,7 @@
       {
         "kind": "OBJECT",
         "name": "maoo_profiles",
-        "description": "columns and relationships of \"maoo.profiles\"",
+        "description": "An associated profile information for a user. It can be a human (owner) or a cat (pet).\n\n\ncolumns and relationships of \"maoo.profiles\"",
         "fields": [
           {
             "name": "birthdate",

@@ -1,0 +1,9 @@
+{
+  "files.exclude": {
+    "**/.cache": true,
+    "**/.config": true,
+    "**/.idea": true,
+    "**/.local": true,
+    "**/.vercel": true
+  }
+}
