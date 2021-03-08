@@ -1,7 +1,7 @@
 import type { GetServerSideProps } from "next"
 import Head from 'next/head'
 
-import Feed from "@components/feed"
+import Profile from "@components/profile"
 import useSession from "@logic/util/hook/useSession"
 
 export const getServerSideProps: GetServerSideProps = useSession(async context => {
@@ -11,13 +11,13 @@ export const getServerSideProps: GetServerSideProps = useSession(async context =
   }
 })
 
-export default function HomePage({ user }) {
+export default function ProfileInfo({user}) {
   return (
     <>
       <Head>
-        <title>maoo</title>
+        <title>maoo | Your Profile</title>
       </Head>
-      <Feed />
+      <Profile user={user}/>
     </>
   )
 }

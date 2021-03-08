@@ -1,7 +1,7 @@
 import type { GetServerSideProps } from "next"
 import Head from 'next/head'
 
-import Feed from "@components/feed"
+import Drop from "@components/drop"
 import useSession from "@logic/util/hook/useSession"
 
 export const getServerSideProps: GetServerSideProps = useSession(async context => {
@@ -11,13 +11,13 @@ export const getServerSideProps: GetServerSideProps = useSession(async context =
   }
 })
 
-export default function HomePage({ user }) {
+export default function Drops() {
   return (
     <>
       <Head>
-        <title>maoo</title>
+        <title>maoo | Drop</title>
       </Head>
-      <Feed />
+      <Drop />
     </>
   )
 }

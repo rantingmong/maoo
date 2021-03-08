@@ -1,0 +1,40 @@
+query GetInfoForUser($id: String!) {
+  user(id: $id) {
+    email
+    profiles {
+      id
+      name_first
+      name_last
+      gender
+      birthdate
+      owner {
+        description
+      }
+      pet {
+        breed
+        coat
+        color
+      }
+    }
+  }
+}
+
+mutation CreateUser($email: String!, $uid: String!, $name_user: String!) {
+  create_user(object:{
+    id          : $uid,
+    email       : $email,
+    name_user   : $name_user
+  }) { 
+    id
+    created_at
+  }
+}
+
+mutation CreateOwnerProfile {
+  create_owner_profile(object: {
+    profile_id: "",
+    description: ""
+  }) {
+    id
+  }
+}

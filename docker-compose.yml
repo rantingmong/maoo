@@ -6,6 +6,8 @@ services:
       dockerfile: Dockerfile-vercel-dev
     environment:
       TOKEN: lWCzZfvEJY2HA6A20dMnuHRR
+      FIREBASE_AUTH_EMULATOR_HOST: "firebase:29099"
+      MAOO_ENVIRONMENT: development
     ports:
       - "3000:3000"
     volumes:
@@ -16,6 +18,7 @@ services:
       dockerfile: Dockerfile-firebase
       args:
         VERSION: 9.3.0
+    restart: always
     ports:
     - "24000:24000"
     - "25000:25000"

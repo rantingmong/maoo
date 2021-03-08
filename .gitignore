@@ -24,5 +24,6 @@ lib/
 .next
 .cache
 .local
-generated
-logic/buslo-collective-firebase-adminsdk-a83ac-ccd3c671eb.json
+@generated
+@logic/buslo-collective-firebase-adminsdk-a83ac-ccd3c671eb.json
+.vscode-server

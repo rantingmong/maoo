@@ -1,0 +1,18 @@
+schema:
+  - "http://localhost:8080/v1/graphql":
+      headers:
+        x-hasura-admin-secret: adminsecret
+documents: "./@logic/remote/**/*.graphql"
+extensions:
+  codegen:
+    overwrite: true
+    generates:
+      '@generated/graphql.ts':
+        plugins:
+          - "typescript"
+          - "typescript-operations"
+          - "typescript-graphql-request"
+        config:
+          rawRequest: true
+          skipTypeNameForRoot: true
+          useTypeImports: true
