@@ -1,7 +1,7 @@
 schema:
-  - "http://localhost:8080/v1/graphql":
+  - ${MAOO_SCHEMA_ENDPOINT:"http://localhost:8080/v1/graphql"}:
       headers:
-        x-hasura-admin-secret: adminsecret
+        x-hasura-admin-secret: ${MAOO_SCHEMA_SECRET:"adminsecret"}
 documents: "./@logic/remote/**/*.graphql"
 extensions:
   codegen:

@@ -16,7 +16,7 @@ if (!firebase.apps.length) {
 
 const firebase_auth = firebase.auth()
 
-if (process.env.NODE_ENV == 'development') {
+if (process.env.VERCEL_ENV == 'development') {
   console.log('using emulated auth')
   firebase_auth.useEmulator('http://localhost:29099')
 }
