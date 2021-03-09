@@ -1,5 +1,5 @@
-import type {Request, Response} from "express"
+import { NextApiRequest, NextApiResponse } from "next";
 
-export default (req: Request, res: Response) => {
+export default (req: NextApiRequest, res: NextApiResponse) => {
   
 }
