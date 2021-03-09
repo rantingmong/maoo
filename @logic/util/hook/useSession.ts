@@ -29,18 +29,22 @@ export default function useSession<
     const user = (await axios.get(`http://vercel:3000/api/users/${session}`, {withCredentials:true})).data.user || {}
     const result = await inside({...context, user})
 
-    if (result.props) {
+    if ('props' in result) {
       return {
         props: {
           ...result.props,
           user
         }
       }
-    } else if (result.redirect) {
+    }
+
+    if ('redirect' in result) {
       return {
         redirect: result.redirect
       }
-    } else if (result.notFound) {
+    }
+
+    if (result.notFound) {
       return {
         notFound: true
       }
