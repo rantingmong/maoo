@@ -20,3 +20,10 @@ public/program.js
 lib/
 .idea
 /src/generated/*.ts
+.config
+.next
+.cache
+.local
+@generated
+@logic/buslo-collective-firebase-adminsdk-a83ac-ccd3c671eb.json
+.vscode-server

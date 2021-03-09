@@ -1,11 +1,24 @@
 version: '3.6'
 services:
+  vercel:
+    build:
+      context: .
+      dockerfile: Dockerfile-vercel-dev
+    environment:
+      TOKEN: lWCzZfvEJY2HA6A20dMnuHRR
+      FIREBASE_AUTH_EMULATOR_HOST: "firebase:29099"
+      MAOO_ENVIRONMENT: development
+    ports:
+      - "3000:3000"
+    volumes:
+    - .:/home/node
   firebase:
     build:
       context: .
       dockerfile: Dockerfile-firebase
       args:
         VERSION: 9.3.0
+    restart: always
     ports:
     - "24000:24000"
     - "25000:25000"
@@ -41,6 +54,6 @@ services:
       HASURA_GRAPHQL_DEV_MODE: "true"
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       HASURA_GRAPHQL_ADMIN_SECRET: adminsecret
-      HASURA_GRAPHQL_AUTH_HOOK: http://172.18.0.4:25001/buslo-collective/us-central1/validateUser
+      HASURA_GRAPHQL_AUTH_HOOK: http://vercel:3000/api/user/validate
 volumes:
   db_data:

@@ -1,11 +1,35 @@
 {
-  "include": [
-    "./src/**/*"
-  ],
-  "exclude": ["node_modules"],
-  "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
-    "lib": ["DOM", "ES2020", "WebWorker"],
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "ES2018"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "paths": {
+      "@components/*": ["@components/*"],
+      "@entities/*": ["@entities/*"],
+      "@logic/*": ["@logic/*", "@generated/*"],
+    },
+    "baseUrl": "."
   },
-  "importsNotUsedAsValues": "warn"
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

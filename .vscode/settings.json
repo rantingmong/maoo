@@ -1,0 +1,15 @@
+{
+  "files.exclude": {
+    "**/.cache": true,
+    "**/.next": true,
+    "**/.config": true,
+    "**/.idea": true,
+    "**/.local": true,
+    "**/.vercel": true,
+    "functions/lib": true
+  },
+  "files.associations": {
+    "Dockerfile-*": "dockerfile",
+    ".graphqlconfig": "json"
+  }
+}
